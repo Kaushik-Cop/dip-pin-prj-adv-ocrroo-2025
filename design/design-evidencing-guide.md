@@ -27,7 +27,10 @@ However, often we cannot access the user in the frequency that allows rapid iter
 A persona is a fictional character that represents a user. It is a way to describe the user's goals, needs, and behaviors. They are focused on **empathy** and **understanding** the user, not demographics, and not a collection of features.
 
 > Describe the key persona your team is focused on implementing the design. You can describe the persona in a file called `persona.md` in the `design` folder.
->
+>Wayne Jack is a 24-year-old first-year Diploma of IT
+student with low vision who learns programming from tutorial videos. Wayne
+uses a screen magnifier and high-contrast themes, and finds it slow and
+error-prone to read and retype small code from paused videos.
 
 
 ### Persona Template
