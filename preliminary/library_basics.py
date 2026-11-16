@@ -17,20 +17,20 @@ import cv2
 import numpy as np
 
 
-VID_PATH = Path("resources/name-of-vid-given-to-you-by-instructor.mp4")
+VID_PATH = Path("resources/oop.mp4")
 
 class CodingVideo:
     capture: cv2.VideoCapture
 
 
     def __init__(self, video: Path | str):
-        self.capture = ... # You complete me!
+        self.capture = cv2.VideoCapture(str(video)) # You complete me!
         if not self.capture.isOpened():
             raise ValueError(f"Cannot open {video}")
 
-        self.fps = ...
-        self.frame_count = ...
-        self.duration = ...
+        self.fps = self.capture.get(cv2.CAP_PROP_FPS)
+        self.frame_count = int(self.capture.get(cv2.CAP_PROP_FRAME_COUNT))
+        self.duration = self.frame_count / self.fps
 
 
     def __str__(self) -> str:
@@ -45,6 +45,10 @@ class CodingVideo:
         ----------
         https://docs.opencv.org/3.4/d4/d15/group__videoio__flags__base.html#gaeb8dd9c89c10a5c63c139bf7c4f5704d
         """
+
+        return (f"FPS: {self.fps:.2f}\n"
+            f"FRAME COUNT: {self.frame_count}\n"
+            f"DURATION (minutes): {self.duration / 60:.2f}")
 
     def get_frame_number_at_time(self, seconds: int) -> int:
         """Given a time in seconds, returns the value of the nearest frame"""
