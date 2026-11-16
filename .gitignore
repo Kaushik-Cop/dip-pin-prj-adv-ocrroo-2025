@@ -10,3 +10,4 @@ wheels/
 .venv
 resources/*.mp4
 .idea/
+output.png
