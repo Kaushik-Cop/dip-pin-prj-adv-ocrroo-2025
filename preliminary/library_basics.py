@@ -15,7 +15,7 @@ Make sure you read the docstrings C.A.R.E.F.U.L.Y (yes, I took the L to check th
 from pathlib import Path
 import cv2
 import numpy as np
-
+from PIL import Image
 
 VID_PATH = Path("resources/oop.mp4")
 
@@ -53,6 +53,7 @@ class CodingVideo:
     def get_frame_number_at_time(self, seconds: int) -> int:
         """Given a time in seconds, returns the value of the nearest frame"""
 
+        return round(seconds * self.fps)
 
     def get_frame_rgb_array(self, frame_number: int) -> np.ndarray:
         """Returns a numpy N-dimensional array (ndarray)
@@ -66,6 +67,11 @@ class CodingVideo:
         # TODO: Find a tutorial on OpenCV that demonstrates color space conversion
 
         """
+        self.capture.set(cv2.CAP_PROP_POS_FRAMES, frame_number)
+        ok, frame = self.capture.read()
+        if not ok or frame is None:
+            raise ValueError("Invalid frame in target location")
+        return cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
 
     def get_image_as_bytes(self, seconds: int) -> bytes:
         self.capture.set(cv2.CAP_PROP_POS_FRAMES, self.get_frame_number_at_time(seconds))
@@ -86,8 +92,11 @@ class CodingVideo:
       # TODO: Requires a third-party library to convert ndarray to png
       # TODO: Identify the library and add a reference to its documentation
 
-
       """
+      frame_number = self.get_frame_number_at_time(seconds)
+      rgb = self.get_frame_rgb_array(frame_number)
+      Image.fromarray(rgb).save(output_path)
+
 def test():
     """Try out your class here"""
     oop = CodingVideo("resources/oop.mp4")
