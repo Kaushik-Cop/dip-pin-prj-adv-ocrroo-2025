@@ -34,23 +34,30 @@ Complete the steps below and fill in the `> block` sections
 3. Activate the `venv` as instructed by `uv`
 4. In order to complete the project, we need to install OpenCV. Fill in the following:
   - What role does OpenCV have in this project?
-  >
+  >In this project it opens the tutorial video, seeks to a time or frame and 
+   reads frames as NumPy arrays. It can also clean frames up before OCR
   - What is the `uv pip` command to install OpenCV?
-  > `uv pip install ????`
+  > `uv pip install opencv-python`
   - What is the URL of this library's git repo?
-  > [Insert URL Here](https://github.com/opencv/????-?????)
+  > > [opencv-python](https://github.com/opencv/opencv-python)
 5. Add OpenCV to your project using the `uv add` command:
-  > `uv add name-of-open-cv-library
+  > `uv add opencv-python
 
 6. Have the dependencies in the `pyproject.toml` changed? If so, how?
-  >
-  >
+  >Yes, it changed because dependencies was empty before and
+   now it has opencv-python>=5.0.0.93 and uv.lock is created
+  
 7. Why did we use `uv add` over `uv pip`?
-  >
-  >
+  >`uv add` installs the package and writes it into `pyproject.toml` and `uv.lock `
+  compared to `uv pip install`, which just installs it into the venv.
+  This matters because anyone who clones the repo can run `uv sync` 
+  and get the same packages. With `uv pip`, they wouldn’t know OpenCV was needed.
+  
 8. The `numpy` library is required for OpenCV. Should you add an explicit requirement for it? Why/Why not?
-  >
-  >
+  > No, because NumPy is already installed automatically (version 2.5.5)  
+    as a dependency of opencv-python. It is also recorded in uv.lock.
+    You would only add it explicitly if your own code imports numpy directly.
+  
 9. Commit the changes so far to git. Use the message `chore: add OpenCV dependency`
 10. Go to `preliminary/library_basics.py` and complete the required functionality.
 11. Commit your changes with `feat: save video frames`
