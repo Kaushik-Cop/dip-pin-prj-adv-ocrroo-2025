@@ -65,7 +65,7 @@ class CodingVideo:
         Reference
         ---------
         # TODO: Find a tutorial on OpenCV that demonstrates color space conversion
-
+            https://docs.opencv.org/4.x/df/d9d/tutorial_py_colorspaces.html
         """
         self.capture.set(cv2.CAP_PROP_POS_FRAMES, frame_number)
         ok, frame = self.capture.read()
@@ -91,7 +91,7 @@ class CodingVideo:
 
       # TODO: Requires a third-party library to convert ndarray to png
       # TODO: Identify the library and add a reference to its documentation
-
+            https://pillow.readthedocs.io/en/stable/reference/Image.html#PIL.Image.fromarray
       """
       frame_number = self.get_frame_number_at_time(seconds)
       rgb = self.get_frame_rgb_array(frame_number)
