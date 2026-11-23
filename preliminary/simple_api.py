@@ -10,10 +10,17 @@ from fastapi import Response
 from pydantic import BaseModel
 from pathlib import Path
 from library_basics import CodingVideo
-
+from fastapi.responses import FileResponse
+from fastapi.staticfiles import StaticFiles
 
 app = FastAPI()
+STATIC_DIR = Path(__file__).parent / "static"
+app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
 
+
+@app.get("/")
+def index():
+    return FileResponse(STATIC_DIR / "index.html")
 
 # We'll create a lightweight "database" for our videos
 # You can add uploads later (not required for assessment)
