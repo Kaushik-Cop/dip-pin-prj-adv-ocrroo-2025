@@ -1,0 +1,31 @@
+                                     body {
+  position: relative;
+  font-family: Arial, sans-serif;
+  font-size: 20px;
+  max-width: 900px;
+  margin: auto;
+  padding: 1rem;
+  background: white;
+  color: black;
+}
+
+label { display: block; margin-top: 1rem; font-weight: bold; }
+input, select, button { font-size: 1em; padding: 0.3em; }
+
+
+#time-error { color: #b00020; font-weight: bold; }
+
+
+#ocr-text {
+  font-family: monospace;
+  font-size: 1.2em;
+  border: 2px solid;
+  padding: 1rem;
+  white-space: pre-wrap;
+}
+
+
+#frame-img { width: 100%; }
+
+
+:focus { outline: 4px solid orange; }
