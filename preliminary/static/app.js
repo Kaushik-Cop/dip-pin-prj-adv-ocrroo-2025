@@ -9,7 +9,6 @@ const frameImg = document.getElementById("frame-img");
 
 let videoLength = 0;
 
-
 async function loadVideoLength() {
   const response = await fetch(`/video/${videoSelect.value}`);
   const data = await response.json();
@@ -22,7 +21,6 @@ form.addEventListener("submit", async (event) => {
   event.preventDefault();
   const seconds = timeInput.value;
 
-
   if (seconds === "" || isNaN(seconds) || seconds < 0 || seconds >= videoLength) {
     timeError.textContent = `Please enter a time between 0 and ${Math.floor(videoLength)} seconds.`;
     timeError.hidden = false;
@@ -30,7 +28,6 @@ form.addEventListener("submit", async (event) => {
     return;
   }
   timeError.hidden = true;
-
 
   statusEl.textContent = "Extracting text...";
   const response = await fetch(`/video/${videoSelect.value}/frame/${seconds}/ocr`);
@@ -45,7 +42,24 @@ form.addEventListener("submit", async (event) => {
   frameImg.alt = `Video frame at ${seconds} seconds`;
   statusEl.textContent = `Frame captured at ${seconds} seconds. Text extracted, ${lines} lines.`;
 
-
   ocrText.textContent = data.text;
   ocrText.focus();
 });
+
+const fontSizeSelect = document.getElementById("font-size");
+const themeSelect = document.getElementById("theme");
+
+function applySettings() {
+  document.body.style.fontSize = fontSizeSelect.value + "px";
+  document.body.className = themeSelect.value;
+
+  localStorage.setItem("fontSize", fontSizeSelect.value);
+  localStorage.setItem("theme", themeSelect.value);
+}
+
+fontSizeSelect.value = localStorage.getItem("fontSize") || "20";
+themeSelect.value = localStorage.getItem("theme") || "light";
+applySettings();
+
+fontSizeSelect.addEventListener("change", applySettings);
+themeSelect.addEventListener("change", applySettings);

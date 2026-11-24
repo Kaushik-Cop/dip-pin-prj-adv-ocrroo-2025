@@ -1,4 +1,4 @@
-                                     body {
+body {
   position: relative;
   font-family: Arial, sans-serif;
   font-size: 20px;
@@ -9,11 +9,41 @@
   color: black;
 }
 
+
+body.dark { background: #121212; color: #f0f0f0; }
+body.high-contrast { background: black; color: yellow; }
+
 label { display: block; margin-top: 1rem; font-weight: bold; }
 input, select, button { font-size: 1em; padding: 0.3em; }
 
 
+details {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: inherit;
+}
+
+summary {
+  cursor: pointer;
+  padding: 0.4em 0.9em;
+  border: 2px solid;
+  border-radius: 6px;
+  font-weight: bold;
+  list-style: none;
+}
+summary::-webkit-details-marker { display: none; }
+
+
+details[open] {
+  padding: 0.5rem 1rem 1rem;
+  border: 2px solid;
+  border-radius: 6px;
+}
+
+
 #time-error { color: #b00020; font-weight: bold; }
+body.dark #time-error, body.high-contrast #time-error { color: white; }
 
 
 #ocr-text {
@@ -24,8 +54,6 @@ input, select, button { font-size: 1em; padding: 0.3em; }
   white-space: pre-wrap;
 }
 
-
 #frame-img { width: 100%; }
-
 
 :focus { outline: 4px solid orange; }
